@@ -1,0 +1,235 @@
+<!DOCTYPE >
+<html>
+ 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<head>
+<title>way</title>
+</head>
+	
+<style>
+.axis path,
+.axis line{
+	fill:none;
+	stroke:black;
+}
+.line {
+    fill: none;
+    stroke: blue;
+    stroke-width: 2px;
+}
+.tick text {
+	font-size: 12px;
+}
+.tick line {
+	opacity: 1;
+}
+.title {
+	font: 200 48px Helvetica Neue;
+	fill: #666;
+}
+.bar---1 {fill: #ababab;}
+.bar--0 {fill: #ffffff;}
+.bar--1 {fill: #eeb422;}
+.bar--2 {fill: #00fa9a;}
+.bar--3 {fill: #ffc125;}
+.bar--4 {fill: #ff7500;}
+.bar--5 {fill: #caff70;}
+.bar--6 {fill: #ba55d3;}
+.bar--7 {fill: #ff7256;}
+.bar--8 {fill: #c6e2ff;}
+.bar--9 {fill: #97ffff;}
+.bar--10 {fill: #9aff9a;}
+.bar--11 {fill: #ee82ee;}
+.bar--12 {fill: #ffd39b;}
+.bar--13 {fill: #7fff00;}
+.bar--14 {fill: #e066ff;}
+.bar--15 {fill: #63b8ff;}
+.bar--16 {fill: #4eee94;}
+.bar--17 {fill: #ee1289;}
+.bar--18 {fill: #836fff;}
+.bar--19 {fill: #43cd80;}
+.bar--20 {fill: #8b6508;}
+.bar--21 {fill: #ffff00;}
+
+.vistop{
+	float:left;
+}
+.visbottom{
+	float:left;
+}
+</style>
+
+<body>
+<div class="vis">
+	<div class="vistop" id="vistop">
+		<h2>一楼平面图</h2>
+	</div>
+	<div class="visbottom" id="visbottom">
+		<h2>二楼平面图</h2>
+	</div>
+	<div class="clear"></div>
+</div>
+<div class="people">
+	<form method="post">
+		id <input id="id" name="id" type="text" value="" size="10" maxlength="5"></br>
+		day <select id="day" name="day">
+				<option value="1" >第1天</option>
+				<option value="2" >第2天</option>
+				<option value="3" >第3天</option>
+			</select></br>
+		<input name="submit" type="button" value="   查询   " onclick="find()">
+	</form>
+</div>
+<div class="clear"></div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="d3.v3.js"></script>
+<script>
+var width=1000;
+var height=510;
+var padding={top:20, right:50, bottom: 10, left:50};
+
+var xScale=d3.scale.linear()
+	.domain([0,30])
+	.range([0,width-padding.left-padding.right]);
+
+var yScale=d3.scale.linear()
+	.domain([-16,0])
+	.range([height-padding.bottom-padding.top,0]);
+
+var svgtop=d3.select("#vistop")
+	.append("svg")
+	.attr("width",width)
+	.attr("height",height);
+var svgbottom=d3.select("#visbottom")
+	.append("svg")
+	.attr("width",width)
+	.attr("height",height);
+
+//给X和Y轴设置刻度尺
+var xAxis=d3.svg.axis()
+	.scale(xScale)
+	.orient("top")
+	.ticks(30)
+	.innerTickSize(-(height-padding.bottom-padding.top))
+	.outerTickSize(0);                  
+var yAxis=d3.svg.axis()
+	.scale(yScale)
+	.orient("left")
+	.ticks(16)
+	.innerTickSize(-(width-padding.left-padding.right))
+	.outerTickSize(0)
+
+//添加一个g用于放x轴
+svgtop.append("g")
+	.attr("class","axis")
+	.attr("transform","translate("+padding.left+","+padding.top+")")
+	.call(xAxis);
+//添加一个g用于放y轴
+svgtop.append("g")
+	.attr("class","axis")
+	.attr("transform","translate("+padding.left+","+padding.top+")")
+	.call(yAxis);
+
+//添加一个g用于放x轴
+svgbottom.append("g")
+	.attr("class","axis")
+	.attr("transform","translate("+padding.left+","+padding.top+")")
+	.call(xAxis);
+//添加一个g用于放y轴
+svgbottom.append("g")
+	.attr("class","axis")
+	.attr("transform","translate("+padding.left+","+padding.top+")")
+	.call(yAxis);
+
+d3.csv("map1.csv", function(error, data) {
+	svgtop.selectAll(".bar")
+	.data(data)
+	.enter().append("rect")
+	.attr("class", function(data){ return "bar bar--" + data.firstfloor; })
+	.attr("x", function(data){ return padding.left + 30 * (data.x-1)})
+	.attr("y", function(data){ return padding.top + 30 * (data.y-1)})
+	.attr("width", xScale(1))
+	.attr("height", -yScale(1));
+});
+
+d3.csv("map2.csv", function(error, data) {
+	svgbottom.selectAll(".bar")
+	.data(data)
+	.enter().append("rect")
+	.attr("class", function(data){ return "bar bar--" + data.secondfloor; })
+	.attr("x", function(data){ return padding.left + 30 * (data.x-1)})
+	.attr("y", function(data){ return padding.top + 30 * (data.y-1)})
+	.attr("width", xScale(1))
+	.attr("height", -yScale(1));
+});
+
+function find() {
+	var id = document.getElementById("id").value;
+	var day = document.getElementById("day").value;
+d3.csv("day"+day+".csv", function(error, data) {
+	var ary1 = [];
+	var ary2 = [];
+	for( var i=0; i<data.length; i++ ){
+		if (data[i].id==id){
+			if (data[i].sid.substr(0,1)==1){
+				ary1.push([data[i].sid.substr(1,2)-(-0.5),data[i].sid.substr(3,2)-(-0.5)]);
+			}
+			else{
+				ary2.push([data[i].sid.substr(1,2)-(-0.5),data[i].sid.substr(3,2)-(-0.5)]);
+			}
+		}
+	}
+	var array1 = [];
+	var array2 = [];
+	array1[0]=array1[1]=array2[0]=array2[1]=0;
+	array1.push(ary1);
+	array2.push(ary2);
+//svgtop.removeChild(path);
+//svgbottom.removeChild(path);
+
+svgtop.selectAll("path")
+	.data(array1)
+	.enter()
+	.append("path")
+	.attr("class","path")
+	.attr("transform","translate("+padding.left+","+padding.top+")")
+	.attr("d",function(array1){
+		return linePath(array1);
+		//返回线段生成器得到的路径
+	})
+	.attr("fill","none")
+	.attr("stroke-width",2)
+	.attr("stroke","black")
+	.attr("opacity",0.4);
+
+svgbottom.selectAll("path")
+	.data(array2)
+	.enter()
+	.append("path")
+	.attr("transform","translate("+padding.left+","+padding.top+")")
+	.attr("d",function(array2){
+		return linePath(array2);
+		//返回线段生成器得到的路径
+	})
+	.attr("fill","none")
+	.attr("stroke-width",2)
+	.attr("stroke","black")
+	.attr("opacity",0.4);
+});	
+
+var linePath=d3.svg.line()//创建一个直线生成器
+	.x(function(d){
+		return xScale(d[1]);
+	})
+	.y(function(d){
+		return yScale(-d[0]);
+	});
+	//.interpolate("basis")//插值模式
+};
+//console.log(id);
+</script>
+</body>
+</html>
+
+
+

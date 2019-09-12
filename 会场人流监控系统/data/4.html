@@ -1,0 +1,112 @@
+<svg width='900' height='500'></svg>
+<div id='tooltip' style='position:absolute;background-color:lightgray;padding:5px'></div>
+<script src="http://d3js.org/d3.v4.min.js"></script>
+<script>
+  
+// Define margins, dimensions, and some line colors
+const margin = {top: 40, right: 120, bottom: 30, left: 40};
+const width = 900 - margin.left - margin.right;
+const height = 500 - margin.top - margin.bottom;
+
+// Define the scales and tell D3 how to draw the line
+const x = d3.scaleLinear().domain([0, 80000]).range([0, width]);     
+const y = d3.scaleLinear().domain([0, 3000]).range([height, 0]);
+const line = d3.line().x(d => x(d.time)).y(d => y(d.num));
+
+const chart = d3.select('svg').append('g')
+  .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+  
+const tooltip = d3.select('#tooltip');
+const tooltipLine = chart.append('line');
+  
+// Add the axes and a title
+var xAxis = d3.axisBottom(x).tickFormat(d3.format('.4'));//innerTickSize(-(height-margin.bottom-margin.top));
+var yAxis = d3.axisLeft(y).tickFormat(d3.format('.2s'));
+chart.append('g').call(yAxis); 
+chart.append('g').attr('transform', 'translate(0,' + height + ')').call(xAxis);
+chart.append('text').html('ROOM4').attr('x', 200);
+  
+// Load the data and draw a chart
+let states, tipBox;
+//d3.csv("census2000.csv", type, function(error, data){
+d3.json('4.json', d => {
+  states = d;
+
+  chart.selectAll()
+    .data(states).enter()
+    .append('path')
+    .attr('fill', 'none')
+    .attr('stroke', d => d.color)
+    .attr('stroke-width', 2)
+    .datum(d => d.people)
+    .attr('d', line);
+  
+  chart.selectAll()
+    .data(states).enter()
+    .append('text')
+    .html(d => d.date)
+    .attr('fill', d => d.color)
+    .attr('alignment-baseline', 'middle')
+    .attr('x', width)
+    .attr('dx', '.5em')
+    .attr('y', d => y(d.max)); 
+  
+  tipBox = chart.append('rect')
+    .attr('width', width)
+    .attr('height', height)
+    .attr('opacity', 0)
+    .on('mousemove', drawTooltip)
+    .on('mouseout', removeTooltip);
+})
+
+function removeTooltip() {
+  if (tooltip) tooltip.style('display', 'none');
+  if (tooltipLine) tooltipLine.attr('stroke', 'none');
+}
+
+function drawTooltip() {
+  const time = Math.floor((x.invert(d3.mouse(tipBox.node())[0])) / 1);
+	console.log(d3.mouse(tipBox.node())[0]);
+	console.log(x.invert(d3.mouse(tipBox.node())[0]));
+	console.log(time);
+	/*
+  states.sort((a, b) => {
+	console.log("1111111111");
+	console.log(b.people.find(h => h.time == time).num);
+	console.log("1111111111");
+    return b.people.find(h => h.time == time).num - a.people.find(h => h.time == time).num;
+  })  
+    */
+  tooltipLine.attr('stroke', 'black')
+    .attr('x1', x(time))
+    .attr('x2', x(time))
+    .attr('y1', 0)
+    .attr('y2', height);
+  
+  tooltip.html(time)
+    .style('display', 'block')
+    .style('left', d3.event.pageX + 20)
+    .style('top', d3.event.pageY - 20)
+    .selectAll()
+    .data(states).enter()
+    .append('div')
+    .style('color', d => d.color)
+    .html(d => d.date + ': ' + d.people.find(h => h.time == findCloseNum(d.people, time)).num);
+}
+
+function findCloseNum(arr, num) {
+    var index = 0; // 保存最接近数值在数组中的索引
+    var d_value = Number.MAX_VALUE; // 保存差值绝对值，默认为最大数值
+    for (var i = 0; i < arr.length; i++) {
+        var new_d_value = Math.abs(arr[i].time - num); // 新差值
+        if (new_d_value <= d_value) { // 如果新差值绝对值小于等于旧差值绝对值，保存新差值绝对值和索引
+            if (new_d_value === d_value && arr[i].time < index) { // 如果数组中两个数值跟目标数值差值一样，取大
+                continue;
+            }
+            index = arr[i].time;
+            d_value = new_d_value;
+        }
+    }
+    return index // 返回最接近的数值
+}
+</script>
