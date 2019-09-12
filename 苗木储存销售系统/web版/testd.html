@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>青山绿水城市园林买家注册</title>
+<link href="css/style4.css" rel='stylesheet' type='text/css' />
+<link rel="icon" type="image/png" href="images/favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+.error {color: #FF0000;}
+</style>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/clock.js"></script>
+<script type="text/javascript">
+ 	window.onload = function(){
+		initNumXY();
+		setInterval();
+	};
+</script>
+</head>
+<body>
+	<div class="contact" id="contact">
+		<div class="clock" id="clock">
+			<!-- 原点 -->
+			<div class="origin"></div>
+			<!-- 时钟数 -->
+			<div class="dot_box">
+				<div class="dot">6</div>
+				<div class="dot">5</div>
+				<div class="dot">4</div>
+				<div class="dot">3</div>
+				<div class="dot">2</div>
+				<div class="dot">1</div>
+				<div class="dot">12</div>
+				<div class="dot">11</div>
+				<div class="dot">10</div>
+				<div class="dot">9</div>
+				<div class="dot">8</div>
+				<div class="dot">7</div>
+				<div class="clear"></div>
+			</div>
+			<!-- 时、分、秒针 -->
+			<div class="clock_line hour_line" id="hour_line"></div>
+			<div class="clock_line minute_line" id="minute_line"></div>
+			<div class="clock_line second_line" id="second_line"></div>
+			<!-- 日期 -->
+			<div class="date_info" id="date_info"></div>
+			<!-- 时间 -->
+			<div class="time_info" >
+				<div class="time" id="hour_time"></div>
+				<div class="time" id="minute_time"></div>
+				<div class="time" id="second_time"></div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="user">
+			<h1>青山绿水城市园林股份有限公司买家注册</h1></br>
+			<p><span class="error">* 必需的字段</span></p>
+			<form id="user" name="user" method="post" action=d.php target="user_iframe">
+				买家名称		<input id="company" name="company" type="text" value="" size="20" maxlength="20">
+				<span class="error" id="error1">* </span></br>
+				配送省份		<input id="address" name="address" type="text" value="" size="6" maxlength="5">
+				<span class="error" id="error2">* </span></br>
+				采购人姓名		<input id="name" name="name" type="text" value="" size="6" 	maxlength="5">
+				<span class="error" id="error3">* </span></br>
+				联系方式		<input id="phone" name="phone" type="text" value="" size="11" maxlength="11">
+				<span class="error" id="error4">* </span></br>
+				输入密码		<input id="passnum" name="passnum" type="text" value="" size="20" maxlength="20">
+				<span class="error" id="error5">* </span></br>
+				再次输入密码	<input id="checkpass" name="checkpass" type="text" value="" size="20" maxlength="20">
+				<span class="error" id="error6">* </span></br>
+				<!--<button type="button">注册</button>-->
+				<input name="submit" type="submit" value="提交">
+				<input name="reset" type="reset" value="重置"></br>
+				<iframe id="user_iframe" name="user_iframe"></iframe>
+			</form>
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="clear"></div>
+</body>
+</html>

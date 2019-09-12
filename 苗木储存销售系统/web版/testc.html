@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>青山绿水城市园林预定苗木</title>
+<link href="css/style3.css" rel='stylesheet' type='text/css' />
+<link rel="icon" type="image/png" href="images/favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script>
+	var nums1 = 0;
+	var nums2 = 4;
+	function fort(){  // 定义图片切换函数
+		nums1 ++;
+		nums2 ++;
+		document.getElementById("pict1").setAttribute("src","images/tree"+nums1+".jpg");
+		document.getElementById("pict2").setAttribute("src","images/tree"+nums2+".jpg");
+		if(nums1 == 8){
+			nums1 = 0;
+		}
+		if(nums2 == 8){
+			nums2 = 0;
+		}
+	}
+	function slide(){  // 每隔1秒连续不断的调用fort()函数
+		setInterval("fort()", 1000);
+	}
+</script>
+</head>
+<body onload=slide()>
+	<div class="contact" id="contact">
+		<div class="top">
+		<div class="ftable">
+			<table>
+				<caption>
+					<h2>青山绿水城市园林库存查询</h2>
+				</caption>
+			</table>
+			<iframe id="ftree_iframe" name="ftree_iframe"></iframe>
+		</div>
+		<div class="fbuy">
+			<form id="form1" name="form1" action=c1.php method="post" target="ftree_iframe">
+				树种<select id="ftname" name="ftname">
+					<option value="樟树" >樟树</option>
+					<option value="松树" >松树</option>
+					<option value="银杏树" >银杏树</option>
+					<option value="槐花树" >槐花树</option>
+					<option value="梧桐树" >梧桐树</option>
+					<option value="柏树" >柏树</option>
+					<option value="红叶石楠" >红叶石楠</option>
+					<option value="枫树" >枫树</option>
+					</select>
+				<input name="submit" type="submit" value="查询">
+			</form>
+			<a>------------------------------------------------------------------------</a>
+			<form id="form2" name="form2" action=c2.php method="post" target="tree_iframe">
+				树种<select id="tname" name="tname">
+					<option value="樟树" >樟树</option>
+					<option value="松树" >松树</option>
+					<option value="银杏树" >银杏树</option>
+					<option value="槐花树" >槐花树</option>
+					<option value="梧桐树" >梧桐树</option>
+					<option value="柏树" >柏树</option>
+					<option value="红叶石楠" >红叶石楠</option>
+					<option value="枫树" >枫树</option>
+					</select></br>
+				数量<input id="num" name="num" type="text" value="" size="6" maxlength="4"></br>
+				口径<input id="size" name="size" type="text" value="" size="6" maxlength="4"></br>
+				土球大小：
+				<input name="tu" type="radio" value="大" checked="checked">
+				大土球
+				<input name="tu" type="radio" value="小" >
+				小土球</br>
+				用户名<input id="bname" name="bname" type="text" value="" size="20" maxlength="20"></br>
+				密码<input id="passnum" name="passnum" type="text" value="" size="20" maxlength="20"></br>
+				<input name="submit" type="submit" value="预定">
+				<input name="reset" type="reset" value="重置"></br>
+				<iframe id="tree_iframe" name="tree_iframe"></iframe>
+			</form>
+			<div class="clear"></div>
+		</div>
+		</div>
+		<div class="pic">
+			<img src="images/tree1.jpg" id="pict1" onplaying="slide()">
+			<img src="images/tree5.jpg" id="pict2" onplaying="slide()">
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</body>
+</html>

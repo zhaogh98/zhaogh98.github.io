@@ -1,0 +1,46 @@
+.clear{clear: both;}
+a,a:hover{ text-decoration:none;}
+@font-face {
+      font-family: 'caviar_dreamsregular';
+      src: url(../fonts/CaviarDreams-webfont.ttf) format('truetype');
+}
+html, body{
+	font-family: '微软雅黑', sans-serif;
+	background:#fff;
+	font-size: 100%;
+}
+body a{
+ 	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+}
+.contact{
+	width:100%;
+	background: url(../images/back.jpg) no-repeat;
+	background-position:center;
+	background-size:cover;
+}
+.contact img{
+	width:100%;
+}
+.intro{
+	float:left;
+	margin-top:40px;
+	margin-left:100px;
+	margin-bottom:50px;
+	background:rgba( 255, 255, 255, 0.50);
+	width:85%;
+	padding:20px;
+	box-shadow:#acacac 1px 1px 10px;
+	height:700px;
+}
+.intro h1{
+	font-family: '微软雅黑';
+	font-size:3em;
+	text-transform:uppercase;
+}
+.intro a{
+	font-family: '微软雅黑';
+	font-size:2.5em;
+	text-transform:uppercase;
+}

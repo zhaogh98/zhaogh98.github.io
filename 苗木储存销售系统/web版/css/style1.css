@@ -1,0 +1,219 @@
+.clear{clear: both;}
+a,a:hover{ text-decoration:none;}
+@font-face {
+      font-family: 'caviar_dreamsregular';
+      src: url(../fonts/CaviarDreams-webfont.ttf) format('truetype');
+}
+html, body{
+	font-family: '微软雅黑', sans-serif;
+	background:#fff;
+	font-size: 100%;
+}
+body a{
+ 	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+}
+.header{
+	width: 100%;
+	overflow:hidden;
+}
+.header-top{
+	background: #FFF;
+	padding: 15px 0 0 0;
+}
+.cname{
+	float:left;
+	font-family: '微软雅黑';
+	margin-left:200px;
+	color:#009900;
+	font-size:2.5em;
+	text-transform: uppercase;
+	padding: 10px;
+	width:50%;
+}
+.seach{
+	float:right;
+	width:50%;
+	margin-top:20px;
+	margin-right:200px;
+	margin-bottom:20px;
+}
+.seach input{
+	float:left;
+	width:50%;
+	height:36px;
+	padding:5px;
+	font-size:14px;
+	color:#acacac;
+	border-radius:5px;
+	border:#acacac solid 1px;
+	margin:5px 10px 0px 30%;
+
+}
+.seach a{
+	display:block;
+	float:left;
+	width:12%;
+	height:36px;
+	padding:5px;
+	color:#fff;
+	background-color:#2f8253;
+	border-radius:5px;
+	margin:5px 10px 0 10px;
+	text-align:center;
+	border:#2f8253 solid 1px;
+}
+.seach a:hover{
+	background-color:#fff;
+	color:#2f8253;;
+}
+.menu{
+	 float:left;
+	 border-bottom:#acacac solid 1px;
+	 border-top:#acacac solid 1px;
+	 margin:5px 0 10px 0;
+	 width:100%
+}
+.menu li{
+	display:inline-block;
+}
+.menu li:first-child{
+   	margin-left:0;
+}
+.menu li a{
+  	display: block;
+	font-size:15px;
+	text-transform: uppercase;
+	padding:5px 20px;
+	color: #000;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+	font-weight: 600;
+}
+.menu li a:hover ,.menu li.active a{
+	 background:#fff;
+	 color:#2f8253;
+}
+.header-bottom{
+	background: url(../images/background.png) no-repeat;
+	background-position: center;
+	background-size:auto 100%;
+}
+.header-bottom img{
+	width:100%;
+}
+.cword{
+	position:absolute;
+	width:760px;
+	height:120px;
+	top:50%;
+	left:50%;
+	margin-left:-380px;
+	background:rgba(00,22,33,0.5);
+}
+.cword a{
+	font-family: '微软雅黑';
+	color:#FFF;
+	font-size:5em;
+	text-transform:uppercase;
+}
+.contact{
+	width:100%;
+	background: url(../images/fenlei.jpg) no-repeat;
+	background-position:center;
+	background-size:cover;
+}
+.contact img{
+	width:100%;
+}
+.tree1{
+	float:left;
+	margin-left:180px;
+	background:rgba( 255, 255, 255, 0.50);
+	width:20%;
+	padding:10px;
+	box-shadow:#acacac 1px 1px 10px;
+	height:800px;
+	margin-bottom:10px;
+}
+.tree2{
+	float:left;
+	margin-left:10px;
+	background:rgba( 255, 255, 255, 0.50);
+	width:20%;
+	padding:10px;
+	box-shadow:#acacac 1px 1px 10px;
+	height:800px;
+	margin-bottom:10px;
+}
+.tree3{
+	float:left;
+	margin-left:10px;
+	background:rgba( 255, 255, 255, 0.50);
+	width:20%;
+	padding:10px;
+	box-shadow:#acacac 1px 1px 10px;
+	height:800px;
+	margin-bottom:10px;
+}
+.tree4{
+	float:left;
+	margin-left:10px;
+	background:rgba( 255, 255, 255, 0.50);
+	width:20%;
+	padding:10px;
+	box-shadow:#acacac 1px 1px 10px;
+	height:800px;
+	margin-bottom:10px;
+}
+.infor{
+	width:100%;
+	padding-left:15px;
+}
+.infor h3{
+	margin:60px 0 10px 0;
+	font-size:1.8em;
+}
+.infor img{
+	float:left;
+	width:95%;
+}
+.infor a{
+	display:block;
+	float:left;
+	background-color:#42b574;
+	color:#FFF;
+	padding:5px;
+	margin:20px 0 0 10px;
+	margin-bottom:20px;
+}
+p#back-to-top{
+    position:fixed;
+    bottom:100px;
+    right:80px;
+}
+p#back-to-top a{
+    text-align:center;
+    text-decoration:none;
+    color:#d1d1d1;
+    display:block;
+    width:50px;
+}
+p#back-to-top a span{
+    background:url(../images/top-move.png) no-repeat center center;
+    border-radius:6px;
+    display:block;
+    height:50px;
+    width:50px;
+    margin-bottom:5px;
+    /*使用CSS3中的transition属性给<span>标签背景颜色添加渐变效果*/
+    -moz-transition:background1s;
+    -webkit-transition:background1s;
+    -o-transition:background1s;
+}
+#back-to-top a:hover span{
+    background:url(../images/top-move.png) no-repeat center center;
+}
