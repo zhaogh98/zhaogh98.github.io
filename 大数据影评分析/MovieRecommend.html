@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>推荐结果</title>
+    <script src="echarts.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="chart1" style="width: 90%;height: 400px;top: 50px;left: 5%;border: 3px solid #000;"></div>
+<script>
+    var chart1 = echarts.init(document.getElementById("chart1"));
+    option = {
+        title : {
+            text: '推荐结果展示',
+            subtext: '',
+            x:'center'
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+            orient : 'vertical',
+            x : 'left',
+            data:['电影1','电影2','电影3','电影4','电影5','电影6']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {
+                    show: true,
+                    type: ['pie', 'funnel'],
+                    option: {
+                        funnel: {
+                            x: '25%',
+                            width: '50%',
+                            funnelAlign: 'left',
+                            max: 1548
+                        }
+                    }
+                },
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        series : [
+            {
+                name:'用户A',
+                type:'pie',
+                radius : '55%',
+                center: ['15%', '60%'],
+                data:[
+                    {value:9.87, name:'电影1'},
+                    {value:16.59, name:'电影2'},
+                    {value:4.44, name:'电影3'},
+                    {value:11.68, name:'电影4'},
+                    {value:6.45, name:'电影5'},
+                    {value:15.40, name:'电影6'}
+                ]
+            },
+            {
+                name:'用户B',
+                type:'pie',
+                radius : '55%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:2.38, name:'电影1'},
+                    {value:8.27, name:'电影2'},
+                    {value:1, name:'电影3'},
+                    {value:3.27, name:'电影4'},
+                    {value:7.42, name:'电影5'},
+                    {value:9.77, name:'电影6'}
+                ]
+            },
+            {
+                name:'用户C',
+                type:'pie',
+                radius : '55%',
+                center: ['85%', '60%'],
+                data:[
+                    {value:23.90, name:'电影1'},
+                    {value:4.25, name:'电影2'},
+                    {value:23.95, name:'电影3'},
+                    {value:22.85, name:'电影4'},
+                    {value:1, name:'电影5'},
+                    {value:3.10, name:'电影6'}
+                ]
+            },
+
+        ]
+    };
+    chart1.setOption(option)
+
+</script>
+</body>
+</html>
